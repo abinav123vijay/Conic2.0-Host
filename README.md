@@ -21,7 +21,7 @@ There are exactly two application roles:
 | Investor 1 | Viewer | Read-only, safe operational dashboards |
 | Investor 2 | Viewer | Read-only, safe operational dashboards |
 
-Share percentages do not affect application roles. Signup uses server-side `AUTH_OWNER_SIGNUP_CODE` and `AUTH_VIEWER_SIGNUP_CODE`; the request cannot choose a role. Signup permits at most two accounts per role. No default account or password is created.
+Share percentages do not affect application roles. Signup uses server-side `AUTH_OWNER_SIGNUP_CODE` and `AUTH_VIEWER_SIGNUP_CODE`; the request cannot choose a role. There is currently no per-role account limit. Anyone with an invite code can create an account for its role; keep codes private and rotate them when needed. No default account or password is created.
 
 Owners can access all pages and write APIs. Viewers can access Overview, Monthly Dashboard, Yearly Dashboard, Daily Entries, and Purchases. Viewer API responses contain only approved sales and vendor-purchase fields; salary, expenses, rent, partner payments, balance movements, reconciliation, settings, and export data are not returned. Writes and private finance APIs return `403` for viewers.
 
@@ -73,7 +73,7 @@ NODE_ENV=development
 Generate each secret independently, for example with Node's `crypto.randomBytes(32).toString('base64url')`. Do not reuse the session secret as an invite code. Keep the two invite codes different, private, and out of client code.
 
 3. Install dependencies with `npm install`, then start with `npm run dev`.
-4. Create two owner accounts using the owner code, then two investor accounts using the viewer code. Signup stops after two accounts of each role. Use separate email addresses and unique passwords of at least 12 characters. Store credentials in a password manager.
+4. Create owner accounts using the owner code and viewer accounts using the viewer code. There is currently no per-role account limit, so keep both invite codes private and rotate them if access should stop. Use separate email addresses and unique passwords of at least 12 characters. Store credentials in a password manager.
 5. Test viewer restrictions and owner access locally before deployment.
 
 The existing database and `users` collection are not recreated. Do not run any seed script or import Truck 1 data. The `auth:set-password` script is for a known, existing Truck 2 account only and requires Truck 2 environment values.

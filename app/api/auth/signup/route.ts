@@ -44,9 +44,6 @@ export async function POST(request: Request) {
     const users = db.collection('users');
     const existing = await users.findOne({ businessId: BUSINESS_ID, email: { $regex: `^${escapedEmail}$`, $options: 'i' } });
     if (existing) return NextResponse.json({ error: 'An account with that email already exists.' }, { status: 409 });
-    const roleCount = await users.countDocuments({ businessId: BUSINESS_ID, role });
-    if (roleCount >= 2) return NextResponse.json({ error: `Both ${role} accounts have already been provisioned.` }, { status: 409 });
-
     const result = await users.insertOne({
       email,
       passwordHash: await hashPassword(password),

@@ -35,7 +35,7 @@ function sessionRole(response: Response) {
   return readSessionToken(token)?.role;
 }
 
-test('signup assigns only the invite-code role and caps Truck 2 at two users per role', async () => {
+test('signup assigns roles from invite codes without per-role account caps', async () => {
   const restoreMongo = installInMemoryMongo();
   const restoreEnvironment = inviteEnvironment();
   try {
@@ -49,7 +49,11 @@ test('signup assigns only the invite-code role and caps Truck 2 at two users per
       { email: 'Owner.One@example.test', inviteCode: 'truck-two-owner-test-code', role: 'owner' },
       { email: 'owner.two@example.test', inviteCode: 'truck-two-owner-test-code', role: 'owner' },
       { email: 'viewer.one@example.test', inviteCode: 'truck-two-viewer-test-code', role: 'viewer' },
-      { email: 'viewer.two@example.test', inviteCode: 'truck-two-viewer-test-code', role: 'viewer' }
+      { email: 'viewer.two@example.test', inviteCode: 'truck-two-viewer-test-code', role: 'viewer' },
+      { email: 'viewer.three@example.test', inviteCode: 'truck-two-viewer-test-code', role: 'viewer' },
+      { email: 'viewer.four@example.test', inviteCode: 'truck-two-viewer-test-code', role: 'viewer' },
+      { email: 'viewer.five@example.test', inviteCode: 'truck-two-viewer-test-code', role: 'viewer' },
+      { email: 'owner.three@example.test', inviteCode: 'truck-two-owner-test-code', role: 'owner' }
     ];
     for (const [index, registration] of registrations.entries()) {
       const response = await signup(jsonRequest('http://localhost/api/auth/signup', {
@@ -61,22 +65,13 @@ test('signup assigns only the invite-code role and caps Truck 2 at two users per
     }
 
     const users = restoreMongo.documents('users');
-    assert.equal(users.length, 4);
+    assert.equal(users.length, 8);
     assert.ok(users.every(user => user.businessId === BUSINESS_ID));
-    assert.deepEqual(users.map(user => user.role).sort(), ['owner', 'owner', 'viewer', 'viewer']);
+    assert.deepEqual(users.map(user => user.role).sort(), ['owner', 'owner', 'owner', 'viewer', 'viewer', 'viewer', 'viewer', 'viewer']);
     assert.equal(users[0].email, 'owner.one@example.test');
     assert.ok(users.every(user => typeof user.passwordHash === 'string'));
 
-    for (const registration of [
-      { email: 'owner.third@example.test', inviteCode: 'truck-two-owner-test-code' },
-      { email: 'viewer.third@example.test', inviteCode: 'truck-two-viewer-test-code' }
-    ]) {
-      const response = await signup(jsonRequest('http://localhost/api/auth/signup', {
-        ...registration, password: 'a-long-test-password'
-      }));
-      assert.equal(response.status, 409);
-    }
-    assert.equal(users.length, 4);
+    assert.equal(users.length, 8);
   } finally {
     restoreEnvironment();
     restoreMongo.restore();

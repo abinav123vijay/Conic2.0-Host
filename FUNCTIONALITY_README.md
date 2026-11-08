@@ -13,8 +13,10 @@ The API policy is:
 | Overview/monthly/yearly dashboards | Full | Safe sales and approved purchase aggregates |
 | Daily and purchase reads | Full records | Safe read-only DTOs |
 | Daily/purchase writes | Allowed | `403` |
-| Rent and partner distribution APIs | Allowed | `403` |
+| Rent, partner distribution, and daily savings APIs | Allowed | `403` |
 | Balance, reconciliation, settings, Excel | Allowed | `403` |
+
+Signup has no per-role account cap. Invite codes remain required and determine account roles.
 
 The viewer DTOs omit sensitive fields entirely; the UI is not the security boundary. Viewer monthly/yearly calculations query sales and configured vendor purchases and do not request balances or expose salary, expenses, rent, partner records, payment statuses, or reconciliation information.
 
@@ -30,8 +32,9 @@ Owner monthly operating result is total sales minus total purchases, daily salar
 
 - `rentPayments`: at most one monthly record using a deterministic `_id` and `{businessId, period}`. No record means no assumed rent.
 - `partnerDistributions`: one monthly owner-approved distribution, with a 40% friend allocation and 60% investor-pool allocation. If entered, investor split percentages apply to the pool and must total 100%. Payments may be partial, cannot exceed an allocation, and identical recipient/amount/date entries are rejected atomically.
+- `dailySavings`: an owner-recorded daily amount split between online and cash sales. Each part is limited to the recorded sales for that account and date, and reduces its corresponding operating balance.
 
-Finance navigation contains only Rent and Partner Payments. There are no loan, EMI, interest, savings, or duplicate salary/expense interfaces or APIs. Existing unrelated legacy collections are neither migrated nor deleted.
+Finance navigation contains Rent, Partner Payments, and Daily Savings. There are no loan, EMI, interest, or duplicate salary/expense interfaces or APIs. Existing unrelated legacy collections are neither migrated nor deleted.
 
 ## Excel and data safety
 
