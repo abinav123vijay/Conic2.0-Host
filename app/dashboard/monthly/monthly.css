@@ -1,0 +1,10 @@
+.as-of-card{padding:18px;margin-bottom:16px}
+.as-of-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.as-of-heading h2{margin:0 0 5px;font-size:16px}
+.as-of-heading p{margin:0;color:var(--muted);font-size:12px}
+.as-of-heading label{display:grid;gap:5px;color:var(--muted);font-size:11px;font-weight:700}
+.as-of-heading input{border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);background:#fff}
+.as-of-values{grid-template-columns:repeat(3,minmax(0,1fr))}
+.as-of-values .kpi{box-shadow:none}
+.as-of-error{padding:12px 14px;border-left:3px solid var(--danger);background:#fff1f0;color:var(--danger);font-size:13px}
+@media(max-width:520px){.as-of-heading{align-items:stretch;flex-direction:column}.as-of-values{grid-template-columns:1fr}}

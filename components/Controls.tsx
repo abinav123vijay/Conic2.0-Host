@@ -1,0 +1,4 @@
+'use client';
+import { MONTHS } from '@/lib/constants';
+export function MonthYear({year,month,onChange}:{year:number;month:number;onChange:(y:number,m:number)=>void}){const years=Array.from({length:11},(_,i)=>2020+i);return <div className="filters"><label>Year<select value={year} onChange={e=>onChange(Number(e.target.value),month)}>{years.map(y=><option key={y}>{y}</option>)}</select></label><label>Month<select value={month} onChange={e=>onChange(year,Number(e.target.value))}>{MONTHS.map((m,i)=><option key={m} value={i+1}>{m}</option>)}</select></label></div>}
+export function YearOnly({year,onChange}:{year:number;onChange:(y:number)=>void}){const years=Array.from({length:11},(_,i)=>2020+i);return <label className="year-select">Year<select value={year} onChange={e=>onChange(Number(e.target.value))}>{years.map(y=><option key={y}>{y}</option>)}</select></label>}

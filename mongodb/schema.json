@@ -1,0 +1,354 @@
+{
+  "businesses": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "_id",
+          "name",
+          "currency",
+          "openingOnlineBalance",
+          "openingCashBalance",
+          "vendors",
+          "expenseCategories"
+        ],
+        "properties": {
+          "_id": {
+            "bsonType": "string"
+          },
+          "name": {
+            "bsonType": "string"
+          },
+          "currency": {
+            "enum": [
+              "INR"
+            ]
+          },
+          "dateFormat": {
+            "bsonType": "string"
+          },
+          "openingOnlineBalance": {
+            "bsonType": "number"
+          },
+          "openingCashBalance": {
+            "bsonType": "number"
+          },
+          "truckEmiTotal": {
+            "bsonType": "number",
+            "minimum": 0
+          },
+          "autoEmiTotal": {
+            "bsonType": "number",
+            "minimum": 0
+          },
+          "vendors": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "string"
+            }
+          },
+          "expenseCategories": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "string"
+            }
+          },
+          "updatedAt": {
+            "bsonType": "date"
+          }
+        }
+      }
+    },
+    "indexes": [
+      {
+        "name": 1
+      }
+    ]
+  },
+  "dailyEntries": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "businessId",
+          "date",
+          "onlineSales",
+          "cashSales",
+          "expenses",
+          "expensePaidOnline",
+          "expensePaidCash"
+        ],
+        "properties": {
+          "businessId": {
+            "bsonType": "string"
+          },
+          "date": {
+            "bsonType": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "onlineSales": {
+            "bsonType": "number"
+          },
+          "cashSales": {
+            "bsonType": "number"
+          },
+          "expenses": {
+            "bsonType": "object"
+          },
+          "expensePaidOnline": {
+            "bsonType": "number"
+          },
+          "expensePaidCash": {
+            "bsonType": "number"
+          },
+          "notes": {
+            "bsonType": "string"
+          },
+          "createdAt": {
+            "bsonType": "date"
+          },
+          "updatedAt": {
+            "bsonType": "date"
+          }
+        }
+      }
+    },
+    "indexes": [
+      {
+        "businessId": 1,
+        "date": 1
+      },
+      {
+        "businessId": 1,
+        "date": -1
+      }
+    ]
+  },
+  "purchaseEntries": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "businessId",
+          "purchaseDate",
+          "vendorAmounts",
+          "onlinePurchasePaid",
+          "cashPurchasePaid"
+        ],
+        "properties": {
+          "businessId": {
+            "bsonType": "string"
+          },
+          "purchaseDate": {
+            "bsonType": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "paymentDate": {
+            "bsonType": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "vendorAmounts": {
+            "bsonType": "object"
+          },
+          "onlinePurchasePaid": {
+            "bsonType": "number"
+          },
+          "cashPurchasePaid": {
+            "bsonType": "number"
+          },
+          "createdAt": {
+            "bsonType": "date"
+          },
+          "updatedAt": {
+            "bsonType": "date"
+          }
+        }
+      }
+    },
+    "indexes": [
+      {
+        "businessId": 1,
+        "purchaseDate": 1
+      },
+      {
+        "businessId": 1,
+        "paymentDate": 1
+      }
+    ]
+  },
+  "rentPayments": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["businessId", "period", "amount", "paymentDate", "status", "notes"],
+        "properties": {
+          "_id": { "bsonType": "string" },
+          "businessId": { "bsonType": "string" },
+          "period": { "bsonType": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+          "amount": { "bsonType": "number", "minimum": 0.01 },
+          "paymentDate": { "bsonType": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+          "status": { "enum": ["paid", "pending"] },
+          "notes": { "bsonType": "string", "maxLength": 500 },
+          "createdAt": { "bsonType": "date" },
+          "updatedAt": { "bsonType": "date" }
+        }
+      }
+    },
+    "indexes": [{ "businessId": 1, "period": 1 }]
+  },
+  "partnerDistributions": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["businessId", "period", "approvedAmount", "friendAllocation", "investorAllocation", "payments", "notes"],
+        "properties": {
+          "_id": { "bsonType": "string" },
+          "businessId": { "bsonType": "string" },
+          "period": { "bsonType": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+          "approvedAmount": { "bsonType": "number", "minimum": 0.01 },
+          "friendAllocation": { "bsonType": "number", "minimum": 0 },
+          "investorAllocation": { "bsonType": "number", "minimum": 0 },
+          "investor1Percent": { "bsonType": "number", "minimum": 0, "maximum": 100 },
+          "investor2Percent": { "bsonType": "number", "minimum": 0, "maximum": 100 },
+          "payments": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "required": ["recipient", "amount", "paymentDate"],
+              "properties": {
+                "recipient": { "enum": ["friend", "investors", "investor1", "investor2"] },
+                "amount": { "bsonType": "number", "minimum": 0.01 },
+                "paymentDate": { "bsonType": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+                "note": { "bsonType": "string", "maxLength": 300 }
+              }
+            }
+          },
+          "notes": { "bsonType": "string", "maxLength": 500 },
+          "createdAt": { "bsonType": "date" },
+          "updatedAt": { "bsonType": "date" }
+        }
+      }
+    },
+    "indexes": [{ "businessId": 1, "period": 1 }]
+  },
+  "accountReconciliations": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "businessId",
+          "date",
+          "bookOnline",
+          "bookCash",
+          "actualOnline",
+          "actualCash",
+          "varianceOnline",
+          "varianceCash",
+          "notes",
+          "reconciledAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "businessId": { "bsonType": "string" },
+          "date": { "bsonType": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+          "bookOnline": { "bsonType": "number" },
+          "bookCash": { "bsonType": "number" },
+          "actualOnline": { "bsonType": "number", "minimum": 0 },
+          "actualCash": { "bsonType": "number", "minimum": 0 },
+          "varianceOnline": { "bsonType": "number" },
+          "varianceCash": { "bsonType": "number" },
+          "notes": { "bsonType": "string", "maxLength": 500 },
+          "reconciledAt": { "bsonType": "date" },
+          "updatedAt": { "bsonType": "date" }
+        }
+      }
+    },
+    "indexes": [{ "key": { "businessId": 1, "date": 1 }, "options": { "unique": true } }]
+  },
+  "users": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "email",
+          "businessId",
+          "role"
+        ],
+        "properties": {
+          "email": {
+            "bsonType": "string"
+          },
+          "passwordHash": {
+            "bsonType": "string"
+          },
+          "businessId": {
+            "bsonType": "string"
+          },
+          "role": {
+            "enum": ["owner", "viewer"]
+          },
+          "createdAt": {
+            "bsonType": "date"
+          }
+        }
+      }
+    },
+    "indexes": [
+      {
+        "email": 1
+      },
+      {
+        "businessId": 1,
+        "email": 1
+      }
+    ]
+  },
+  "auditLogs": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": [
+          "businessId",
+          "action",
+          "collection",
+          "createdAt"
+        ],
+        "properties": {
+          "businessId": {
+            "bsonType": "string"
+          },
+          "userId": {
+            "bsonType": "string"
+          },
+          "action": {
+            "bsonType": "string"
+          },
+          "collection": {
+            "bsonType": "string"
+          },
+          "documentId": {
+            "bsonType": "string"
+          },
+          "before": {
+            "bsonType": "object"
+          },
+          "after": {
+            "bsonType": "object"
+          },
+          "createdAt": {
+            "bsonType": "date"
+          }
+        }
+      }
+    },
+    "indexes": [
+      {
+        "businessId": 1,
+        "createdAt": -1
+      }
+    ]
+  }
+}

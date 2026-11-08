@@ -1,0 +1,5 @@
+.delete-dialog.finance-review-dialog{border-top-color:var(--accent)}
+.delete-dialog.finance-review-dialog>p{white-space:pre-line}
+.finance-review-dialog .confirm-dialog-primary{background:var(--accent);color:#fff}
+.finance-review-dialog .confirm-dialog-primary:hover{filter:brightness(.92)}
+html[data-theme='dark'] .finance-review-dialog .confirm-dialog-primary{color:#09090b}

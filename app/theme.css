@@ -1,0 +1,253 @@
+html[data-theme='light'] .theme-toggle,
+.theme-toggle {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--navy);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --navy: #f4f4f5;
+  --navy2: #e4e4e7;
+  --ink: #f4f4f5;
+  --muted: #a1a1aa;
+  --line: #3f3f46;
+  --bg: #09090b;
+  --card: #18181b;
+  --accent: #d4d4d8;
+  --success: #86efac;
+  --warn: #fbbf24;
+  --danger: #fca5a5;
+}
+
+html[data-theme='dark'],
+html[data-theme='dark'] body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .sidebar {
+  background: linear-gradient(180deg, #09090b, #18181b);
+  color: #f4f4f5;
+}
+
+html[data-theme='dark'] .brand-mark {
+  background: #f4f4f5;
+  color: #09090b;
+}
+
+html[data-theme='dark'] .brand span,
+html[data-theme='dark'] .sidebar-footer {
+  color: #a1a1aa;
+}
+
+html[data-theme='dark'] .sidebar nav a {
+  color: #d4d4d8;
+}
+
+html[data-theme='dark'] .sidebar nav a:hover,
+html[data-theme='dark'] .sidebar nav a.active {
+  background: #27272a;
+  color: #fff;
+}
+
+html[data-theme='dark'] .topbar,
+html[data-theme='dark'] .card,
+html[data-theme='dark'] .delete-dialog,
+html[data-theme='dark'] .login-panel {
+  background: var(--card);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+html[data-theme='dark'] .topbar {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+}
+
+html[data-theme='dark'] .page-title,
+html[data-theme='dark'] .card-title,
+html[data-theme='dark'] .finance-list-heading h3,
+html[data-theme='dark'] .login-panel h1 {
+  color: var(--ink);
+}
+
+html[data-theme='dark'] button,
+html[data-theme='dark'] .button {
+  background: #f4f4f5;
+  color: #09090b;
+}
+
+html[data-theme='dark'] .button.secondary,
+html[data-theme='dark'] .finance-delete,
+html[data-theme='dark'] .finance-record-actions .button.secondary {
+  background: #27272a !important;
+  color: #f4f4f5 !important;
+  border-color: #52525b !important;
+}
+
+html[data-theme='dark'] .menu,
+html[data-theme='dark'] .reconciliation-date {
+  background: transparent;
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .settings-reset-button,
+html[data-theme='dark'] .delete-dialog-confirm {
+  background: #b91c1c;
+  color: #fff;
+}
+
+html[data-theme='dark'] .theme-toggle {
+  border: 1px solid var(--line);
+  background: #27272a;
+  color: #f4f4f5;
+}
+
+html[data-theme='dark'] input:not([type='checkbox']):not([type='radio']),
+html[data-theme='dark'] select,
+html[data-theme='dark'] textarea,
+html[data-theme='dark'] .settings-input,
+html[data-theme='dark'] .finance-grid input,
+html[data-theme='dark'] .finance-grid select,
+html[data-theme='dark'] .finance-edit-row input,
+html[data-theme='dark'] .finance-inline-form input,
+html[data-theme='dark'] .savings-deposits-section td input {
+  background: #27272a;
+  color: #f4f4f5;
+  border-color: #52525b;
+}
+
+html[data-theme='dark'] input[readonly] {
+  background: #18181b;
+}
+
+html[data-theme='dark'] th {
+  background: #27272a;
+  color: #d4d4d8;
+}
+
+html[data-theme='dark'] .finance-balance,
+html[data-theme='dark'] .finance-edit-panel,
+html[data-theme='dark'] .finance-loan-summary-total,
+html[data-theme='dark'] .emi-total-stat,
+html[data-theme='dark'] .emi-total-stat.total,
+html[data-theme='dark'] .reconciliation-total,
+html[data-theme='dark'] .reconciliation-empty,
+html[data-theme='dark'] .login-placeholder {
+  background: #27272a;
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .emi-total-stat.pending {
+  background: #183125;
+}
+
+html[data-theme='dark'] .reconciliation-warning {
+  color: #fed7aa;
+  background: #431407;
+  border-color: #9a3412;
+}
+
+html[data-theme='dark'] .reconciliation-match {
+  color: #bbf7d0;
+  background: #052e16;
+  border-color: #166534;
+}
+
+html[data-theme='dark'] .reconciliation-error,
+html[data-theme='dark'] .finance-error,
+html[data-theme='dark'] .as-of-error,
+html[data-theme='dark'] .login-error,
+html[data-theme='dark'] .delete-dialog-mark {
+  color: #fecaca;
+  background: #450a0a;
+}
+
+html[data-theme='dark'] .delete-dialog-mark {
+  color: var(--danger);
+}
+
+html[data-theme='dark'] .finance-remove {
+  background: #27272a;
+  color: var(--danger);
+  border-color: #7f1d1d;
+}
+
+html[data-theme='dark'] .finance-delete {
+  color: var(--danger) !important;
+  border-color: #7f1d1d !important;
+}
+
+html[data-theme='dark'] .delete-entry {
+  background: #27272a;
+}
+
+html[data-theme='dark'] .settings-reset {
+  border-color: #7f1d1d;
+}
+
+html[data-theme='dark'] .login-page {
+  background: radial-gradient(ellipse at 50% 0%, #27272a 0%, #09090b 58%, #18181b 100%);
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .login-brand .brand-mark {
+  background: #f4f4f5;
+  color: #09090b;
+}
+
+html[data-theme='dark'] .login-brand span,
+html[data-theme='dark'] .login-subtitle,
+html[data-theme='dark'] .login-footer {
+  color: var(--muted);
+}
+
+html[data-theme='dark'] .login-form input,
+html[data-theme='dark'] .settings-reset-form input {
+  background: #27272a;
+  color: var(--ink);
+  border-color: #52525b;
+}
+
+html[data-theme='dark'] .line-chart circle {
+  fill: var(--card);
+}
+
+html[data-theme='dark'] .line-chart line {
+  stroke: #52525b;
+}
+
+html[data-theme='dark'] .line-chart text {
+  fill: var(--muted);
+}
+
+html[data-theme='dark'] .donut > circle:first-child {
+  stroke: #3f3f46;
+}
+
+html[data-theme='dark'] .bar-track {
+  background: #3f3f46;
+}
+
+html[data-theme='dark'] .sync-dot {
+  background: #86efac;
+}
+
+html[data-theme='dark'] .theme-toggle:focus-visible {
+  outline: 2px solid #f4f4f5;
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  html[data-theme='dark'] .theme-toggle {
+    padding: 7px 8px;
+    font-size: 10px;
+  }
+}

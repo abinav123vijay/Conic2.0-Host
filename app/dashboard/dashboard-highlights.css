@@ -1,0 +1,5 @@
+.dashboard-empty-period{margin:-8px 0 18px;padding:13px 16px;border:1px solid var(--accent);border-left-width:4px;border-radius:8px;background:var(--card);color:var(--ink);font-size:13px;line-height:1.5}
+.dashboard-selected-month{background:color-mix(in srgb,var(--accent) 12%,var(--card));font-weight:700}
+.dashboard-selected-month td:first-child{border-left:3px solid var(--accent)}
+.dashboard-load-error{padding:12px 14px;border-left:3px solid var(--danger);background:var(--card);color:var(--danger)}
+@media(max-width:600px){.dashboard-empty-period{margin-top:-4px;padding:11px 12px}}
